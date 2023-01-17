@@ -181,7 +181,7 @@ class Plotter:
             if len(set1Dia) > 0:
                 plt.scatter(set1X, set1Y, set1Dia, colorsFaster[catNr], label='Faster in Set1 ' + name)
         
-        plt.loglog(basex=2, basey=2)
+        #plt.loglog(basex=2, basey=2)
         plt.xlabel('File size')
         plt.ylabel('Block size')
         plt.title('Percentual difference')
@@ -191,5 +191,5 @@ class Plotter:
         plt.savefig(self.outdir + '/' +  Op + '_pcnt')
 
 if __name__ == '__main__':
-    print 'Try running iozone_results_comparator.py'
+    print('Try running iozone_results_comparator.py')
 

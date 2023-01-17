@@ -87,14 +87,21 @@ class OperationResults:
         self.alldata = []
 
         # remove from indexedData
-        for (row, col) in self.indexedData.keys():
+        keys = self.indexedData.keys()
+        del_list = []
+        for key, val in self.indexedData.items():
+            col = key[1]
+            row = key[0]
             if col == name:
-                del self.indexedData[(row, col)]
+                #del self.indexedData[(row, col)]
+                del_list.append((row, col))
             # reconstruct alldata
             else:
                 for val in self.indexedData[(row, col)]:
                     self.alldata.append(val)
 
+        for key in del_list:
+            del self.indexedData[key]
         # removal from self.data not performed since this item is used only
         # for creating the ALL pseudooperation data and not later
 
@@ -154,5 +161,5 @@ class OperationResults:
         return (mean, dev, ci_min, ci_max, gmean, median, first_qrt, third_qrt, minimum, maximum)
 
 if __name__ == '__main__':
-    print 'Try running iozone_results_comparator.py'
+    print('Try running iozone_results_comparator.py')
 

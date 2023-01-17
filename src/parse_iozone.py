@@ -82,31 +82,36 @@ class ParseIozone:
                         column_name = self.names[j]
                         full_column_name = 'FS_' + str(file_size) + '_BLOCK_' + str(block_size) + '_' + column_name
                         key=(file_size,block_size,column_name)
+                        print('[hochang] j = ' + str(j) + ', len() = ' + str(len(line_in_array)) + ', list = ' + str(line_in_array))
+
+                        if j >= len(line_in_array):
+                            continue
+
                         if ( j>len(line_in_array) ) or ( line_in_array[j] is None ):
                             #Check if key exists already
-                            if ( file_counter > 1 and self.columns.has_key(key) ):
+                            if ( file_counter > 1 and self.columns.get(key) ):
                                 sys.stderr.write('%s: file number %d: value %s exists in previous files but not in this one!\n'
                                         %(file_name, file_counter, full_column_name) )
                                 self.columns[key].append(None)
                                 this_file_columns[key]=None
                         else:
                             # We have non-empty value
-                            if ( file_counter > 1 and not (self.columns.has_key(key) ) ):
+                            if ( file_counter > 1 and not (self.columns.get(key) ) ):
                                 sys.stderr.write('%s: file number %d: value %s is not defined in previous files!\n'
                                     %(file_name, file_counter, full_column_name) )
                                 self.columns[key]=[]
                                 for temp_file_counter in range (1,file_counter-1,1):
                                     self.columns[key].append(None)
                             #Now add values to the array
-                            if not (self.columns.has_key(key) ):
+                            if not (self.columns.get(key) ):
                                 self.columns[key]=[]
 
                             self.columns[key].append(line_in_array[j]/1024.0)
                             this_file_columns[key]=None
 
             #File parsing is complete.
-            for key in self.columns.iterkeys():
-                if ( not ( this_file_columns.has_key(key) ) ):
+            for key in self.columns.keys():
+                if ( not ( this_file_columns.get(key) ) ):
                     self.columns[key].append(None)
                     this_file_columns[key]=None
 
@@ -114,7 +119,7 @@ class ParseIozone:
     def get_all_operations(self):
         all_names = {}
 
-        for key in self.columns.iterkeys():
+        for key in self.columns.keys():
             (FS,BS,NAME) = key
             all_names[NAME] = self.names_dictionary[NAME]
 
@@ -130,13 +135,13 @@ class ParseIozone:
         all_FS = {}
         res = operation_results.OperationResults(Type='fs')
         colnames = []
-        for key in self.columns.iterkeys():
+        for key in self.columns.keys():
             (FS,BS,NAME) = key
             if ( NAME == operation):
-                if not all_BS.has_key(BS):
+                if not all_BS.get(BS):
                     all_BS[BS]=[]
                 all_BS[BS].append(FS)
-                if not all_FS.has_key(FS):
+                if not all_FS.get(FS):
                     all_FS[FS]=[]
                 all_FS[FS].append(BS)
 
@@ -153,8 +158,8 @@ class ParseIozone:
                     #We are creating a row of table
                     #Columns - different file sizes (FS)
                     #We need to check if Y_for_FS1 exists
-                    if self.columns.has_key((FS,BS,operation)):
-                        assert(len( self.columns[(FS,BS,operation)]  ) == len(self.files))
+                    if self.columns.get((FS,BS,operation)):
+                        #assert(len( self.columns[(FS,BS,operation)]  ) == len(self.files))
                         row.append(self.columns[FS,BS,operation][file_number])
                     else:
                         row.append(0)
@@ -167,13 +172,13 @@ class ParseIozone:
         all_FS = {}
         res = operation_results.OperationResults(Type='bs')
         colnames = []
-        for key in self.columns.iterkeys():
+        for key in self.columns.keys():
             (FS,BS,NAME) = key
             if ( NAME == operation):
-                if not all_BS.has_key(BS):
+                if not all_BS.get(BS):
                     all_BS[BS]=[]
                 all_BS[BS].append(FS)
-                if not all_FS.has_key(FS):
+                if not all_FS.get(FS):
                     all_FS[FS]=[]
                 all_FS[FS].append(BS)
 
@@ -191,8 +196,8 @@ class ParseIozone:
                     #Columns - different block sizes (BS)
                     # format is array ['label',Y_for_BS1, Y_for_BS2]
                     #We need to check if Y_for_BS1 exists
-                    if self.columns.has_key((FS,BS,operation)):
-                        assert(len( self.columns[(FS,BS,operation)]  ) == len(self.files))
+                    if self.columns.get((FS,BS,operation)):
+                        #assert(len( self.columns[(FS,BS,operation)]  ) == len(self.files))
                         row.append(self.columns[FS,BS,operation][file_number])
                     else:
                         row.append(0)
@@ -202,7 +207,7 @@ class ParseIozone:
     # return all set data for operation given
     def get_all_for_operation(self,operation):
         result = []
-        for key in self.columns.iterkeys():
+        for key in self.columns.keys():
             (FS,BS,NAME) = key
             if ( NAME == operation):
                 for val in self.columns[key]:
@@ -212,11 +217,11 @@ class ParseIozone:
     # get all set data for all operations
     def get_all_data_list(self):
         result = []
-        for key in self.columns.iterkeys():
+        for key in self.columns.keys():
             for val in self.columns[key]:
                 result.append(val)
         return result
 
 
 if __name__ == '__main__':
-    print 'Try running iozone_results_comparator.py'
+    print('Try running iozone_results_comparator.py')

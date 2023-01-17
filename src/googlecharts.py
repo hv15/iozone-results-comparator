@@ -113,5 +113,5 @@ class GoogleCharts:
                 dataRows = json.dumps(dataRows), setNames = sorted(Source.keys()))
 
 if __name__ == '__main__':
-    print 'Try running iozone_results_comparator.py'
+    print('Try running iozone_results_comparator.py')
 

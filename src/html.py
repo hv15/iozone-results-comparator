@@ -73,7 +73,7 @@ class Html:
         <div class="main">
         <div class="inner">
         '''
-        print 'Processing...'
+        print('Processing...')
         self.htmldoc.write(html_header)
 
     def write_footer(self):
@@ -85,8 +85,8 @@ class Html:
         '''
         self.htmldoc.write(html_footer)
         self.htmldoc.close()
-        print 'Finished\nTo view results open in your web browser:'
-        print 'file://' + os.getcwd() + '/' + self.outdir + '/index.html'
+        print('Finished\nTo view results open in your web browser:')
+        print('file://' + os.getcwd() + '/' + self.outdir + '/index.html')
 
     def write_filelist(self):
         self.htmldoc.write('<DL class="filelist">')
@@ -314,4 +314,4 @@ class Html:
         self.htmldoc.write('<hr>\n')
 
 if __name__ == '__main__':
-    print 'Try running iozone_results_comparator.py'
+    print('Try running iozone_results_comparator.py')

@@ -67,7 +67,7 @@ class TsvOutput:
             rowColMap[row].append(col)
 
         # write the data
-        nrOfRuns = len(data.indexedData[data.indexedData.keys()[0]])
+        nrOfRuns = len(data.indexedData[list(data.indexedData.keys())[0]])
         for rowName in sorted(rowColMap.keys()):
             for runNr in range(0, nrOfRuns ):
                 self.tabd.write(data.ylabel + ' = ' + str(rowName) + ' Run = ' + str(runNr + 1))
@@ -144,7 +144,7 @@ class TsvOutput:
             self.tabd.write('\t' + operation)
         self.tabd.write('\n')
 
-        nrOfRuns = len(data[operations[0]].indexedData[data[operations[0]].indexedData.keys()[0]])
+        nrOfRuns = len(data[operations[0]].indexedData[list(data[operations[0]].indexedData.keys())[0]])
 
         # write the data
         for (row, col) in sorted(data[operations[0]].indexedData.keys()):
@@ -180,4 +180,4 @@ class TsvOutput:
         self.tabd.close()
 
 if __name__ == '__main__':
-    print 'Try running iozone_results_comparator.py'
+    print('Try running iozone_results_comparator.py')

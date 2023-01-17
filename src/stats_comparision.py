@@ -62,12 +62,12 @@ class StatsComparision:
             self.set1[op].compute_all_stats()
 
         # summary data is stored in fs only, no need for counting this redundantly in bs
-        if (self.base[self.base.keys()[0]].datatype == 'fs'):
+        if (self.base[list(self.base.keys())[0]].datatype == 'fs'):
             self.summary()
 
         self.ttest_diff()
         # summary data is stored in fs only, no need for counting this redundantly in bs
-        if (self.base[self.base.keys()[0]].datatype == 'fs'):
+        if (self.base[list(self.base.keys())[0]].datatype == 'fs'):
             self.summary_ttest()
 
     def ttest_diff(self):
@@ -155,9 +155,10 @@ class StatsComparision:
         for op in self.common_ops:
             regLine = RegressionLine()
             for (row, col) in self.base[op].indexedMeans.keys():
+                print((row, col))
                 regLine.addPoint(self.base[op].indexedMeans[(row, col)], self.set1[op].indexedMeans[(row, col)])
             regLine.computeSlope()
             self.regressionLines[op] = regLine
 
 if __name__ == '__main__':
-    print 'Try running iozone_results_comparator.py'
+    print('Try running iozone_results_comparator.py')

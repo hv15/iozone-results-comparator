@@ -58,4 +58,4 @@ class MultisetData:
                     self.common_ops.remove(op)
 
 if __name__ == '__main__':
-    print 'Try running iozone_results_comparator.py'
+    print('Try running iozone_results_comparator.py')

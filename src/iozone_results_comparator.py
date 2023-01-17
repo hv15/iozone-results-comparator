@@ -59,7 +59,7 @@ class IozoneResultsComparator:
         self.fs = stats_comparision.StatsComparision()
         self.bs = stats_comparision.StatsComparision()
 
-        self.parsed_base=parse_iozone.ParseIozone(self.args.baseline)
+        self.parsed_base = parse_iozone.ParseIozone(self.args.baseline)
         for op in self.parsed_base.operations:
             self.fs.add_operation_results('baseline', op, self.parsed_base.get_FS_list_for_any_BS(op))
             self.bs.add_operation_results('baseline', op, self.parsed_base.get_BS_list_for_any_FS(op))
@@ -81,6 +81,7 @@ class IozoneResultsComparator:
         else:
             source = dest.set1
         res = operation_results.OperationResults(Type=dataType)
+        print(source[operations[0]].colnames[:])
         res.set_colnames(source[operations[0]].colnames[:]) # we want to copy the list by value, not by refference
         for op in operations:
             for rowName in source[op].data.keys():
