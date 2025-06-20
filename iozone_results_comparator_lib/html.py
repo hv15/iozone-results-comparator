@@ -25,12 +25,12 @@ from . import plotter
 from . import googlecharts
 
 class Html:
-    def __init__(self, OutDir, tabdDir, argv0):
+    def __init__(self, OutDir, tabdDir):
         self.outdir = OutDir
         self.tabdDir = tabdDir
         if not (os.path.exists(OutDir)):
             os.makedirs(OutDir)
-        (head, tail) = os.path.split(argv0)
+        (head, tail) = os.path.split(__file__)
         shutil.copyfile(head + '/stylesheet.css', OutDir + '/stylesheet.css')
         shutil.copyfile(head + '/arrows.png', OutDir + '/arrows.png')
         self.htmldoc=open(OutDir+'/index.html', 'w')
