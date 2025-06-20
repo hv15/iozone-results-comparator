@@ -22,7 +22,7 @@ import os
 import sys
 import re
 
-import operation_results
+from . import operation_results
 
 # class to parse iozone results from input data files
 class ParseIozone:

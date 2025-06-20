@@ -22,12 +22,12 @@ import sys
 import argparse
 import re
 
-import parse_iozone
-import stats_comparision
-import html
-import operation_results
-import multiset_data
-import tsv_output
+from iozone_results_comparator_lib import parse_iozone
+from iozone_results_comparator_lib import stats_comparision
+from iozone_results_comparator_lib import html
+from iozone_results_comparator_lib import operation_results
+from iozone_results_comparator_lib import multiset_data
+from iozone_results_comparator_lib import tsv_output
 
 # the main class
 class IozoneResultsComparator:
@@ -100,7 +100,7 @@ class IozoneResultsComparator:
 
     def parse_multiset_args(self):
         currentSet = ''
-        setArg = re.compile('--set\d+')
+        setArg = re.compile(r'--set\d+')
         setName = re.compile('--')
         if not comparator.remainingArgs or not setArg.match(comparator.remainingArgs[0]):
                 raise Exception('Wrong multiset arguments')

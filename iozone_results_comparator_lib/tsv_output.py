@@ -21,7 +21,7 @@
 import os
 from copy import deepcopy
 
-import operation_results
+from . import operation_results
 
 class TsvOutput:
     def __init__(self, outputDir):

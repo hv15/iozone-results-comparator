@@ -20,7 +20,7 @@
 
 from scipy import stats
 
-from regression_line import RegressionLine
+from .regression_line import RegressionLine
 
 class StatsComparision:
     def __init__(self):

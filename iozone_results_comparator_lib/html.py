@@ -21,8 +21,8 @@
 import os
 import shutil
 
-import plotter
-import googlecharts
+from . import plotter
+from . import googlecharts
 
 class Html:
     def __init__(self, OutDir, tabdDir, argv0):
